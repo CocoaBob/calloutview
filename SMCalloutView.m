@@ -155,25 +155,21 @@ NSTimeInterval const kSMCalloutViewRepositionDelayForUIScrollView = 1.0/3.0;
 // than the callout, otherwise they grow from the upper corner.
 
 - (CGFloat)leftAccessoryVerticalMargin {
-    if (self.leftAccessoryView.frameHeight < self.calloutContainerHeight)
-        return roundf((self.calloutContainerHeight - self.leftAccessoryView.frameHeight) / 2);
-    else
-        return 0;
+    return roundf((self.calloutContainerHeight - self.leftAccessoryView.frameHeight) / 2);
 }
 
 - (CGFloat)leftAccessoryHorizontalMargin {
-    return fminf(self.leftAccessoryVerticalMargin, TITLE_HMARGIN);
+    CGFloat margin = [self leftAccessoryVerticalMargin];
+    return (margin > 0) ? fminf(margin, TITLE_HMARGIN) : 0;
 }
 
 - (CGFloat)rightAccessoryVerticalMargin {
-    if (self.rightAccessoryView.frameHeight < self.calloutContainerHeight)
-        return roundf((self.calloutContainerHeight - self.rightAccessoryView.frameHeight) / 2);
-    else
-        return 0;
+    return roundf((self.calloutContainerHeight - self.rightAccessoryView.frameHeight) / 2);
 }
 
 - (CGFloat)rightAccessoryHorizontalMargin {
-    return fminf(self.rightAccessoryVerticalMargin, TITLE_HMARGIN);
+    CGFloat margin = [self rightAccessoryVerticalMargin];
+    return (margin > 0) ? fminf(margin, TITLE_HMARGIN) : 0;
 }
 
 - (CGFloat)innerContentMarginLeft {
